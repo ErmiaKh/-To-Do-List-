@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>مدیریت کارهای To-Do</title>
+    <style>
+        body { font-family: Tahoma, sans-serif; background-color: #f4f4f9; margin: 20px; direction: rtl; text-align: right;}
+        h1 { color: #333; border-bottom: 2px solid #ccc; padding-bottom: 10px;}
+        .todo-item {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+        .status-Pending { background-color: #fff3cd; border-right: 5px solid #ffc107; } /* زرد */
+        .status-InProgress { background-color: #d1e7ff; border-right: 5px solid #007bff; } /* آبی */
+        .status-Done { background-color: #d4edda; border-right: 5px solid #28a745; } /* سبز */
+        .title { font-size: 1.3em; font-weight: bold; margin-bottom: 5px;}
+        .description { color: #555; margin-bottom: 10px;}
+    </style>
+</head>
+<body>
+<h1>📋 لیست کارهای To-Do</h1>
+
+{% for item in todo_items %}
+<div class="todo-item status-{{ item.status }}">
+    <div class="title">{{ item.title }}</div>
+    {% if item.description %}
+    <div class="description">{{ item.description }}</div>
+    {% endif %}
+    <small>وضعیت: {{ item.get_status_display }}</small>
+</div>
+{% empty %}
+<p>🎉 هیچ کاری در لیست شما ثبت نشده است. وقت شروع کار است!</p>
+{% endfor %}
+
+</body>
+</html>
